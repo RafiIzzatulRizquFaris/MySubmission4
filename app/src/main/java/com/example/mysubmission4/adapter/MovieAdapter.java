@@ -33,8 +33,6 @@ import static com.example.mysubmission4.DatabaseContract.MovieColumns.VOTE;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
-    private final String TAG = "Details: ";
-
     private Context context;
     private List<Movie> movieList;
 
@@ -94,6 +92,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         contentValues.put(VOTE, movielist.getVoteAverage());
         context.getContentResolver().insert(CONTENT_URI,contentValues);
 
+        String TAG = "Details: ";
         Log.d(TAG, "Content Values: " + contentValues);
 
     }

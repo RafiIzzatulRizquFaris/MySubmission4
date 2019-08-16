@@ -1,6 +1,7 @@
 package com.example.mysubmission4.adapter;
 
 import android.database.Cursor;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,17 +12,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.mysubmission4.ApiConfig;
 import com.example.mysubmission4.MovieItem;
 import com.example.mysubmission4.R;
 import com.example.mysubmission4.fragment.MFavFragment;
+
+import static com.example.mysubmission4.ApiConfig.IMAGE_URL;
 
 public class FavoriteMovieAdapter extends RecyclerView.Adapter<FavoriteMovieAdapter.ViewHolder> {
 
     private Cursor cursor;
     private MFavFragment mFavFragment;
 
-    public FavoriteMovieAdapter(MFavFragment mFavFragment, Cursor list) {
+
+    public FavoriteMovieAdapter(MFavFragment mFavFragment) {
         this.mFavFragment = mFavFragment;
     }
 
@@ -40,7 +43,10 @@ public class FavoriteMovieAdapter extends RecyclerView.Adapter<FavoriteMovieAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final MovieItem movielist = getItem(position);
-        String imgUrl = ApiConfig.IMAGE_URL + movielist.getPosterPath();
+        String TAG = "FavoriteMovieAdapter";
+        Log.d(TAG, "Movie ID: " + movielist.getId());
+
+        String imgUrl = IMAGE_URL + movielist.getPosterPath();
         Glide.with(mFavFragment).load(imgUrl).override(150, 175).into(holder.imageViewPoster);
         holder.textViewTitle.setText(movielist.getTitle());
         holder.textViewDate.setText(movielist.getReleaseDate());

@@ -9,9 +9,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.example.mysubmission4.R;
 import com.example.mysubmission4.adapter.FavoriteMovieAdapter;
@@ -23,6 +25,8 @@ import static com.example.mysubmission4.DatabaseContract.CONTENT_URI;
  */
 public class MFavFragment extends Fragment {
 
+
+    private ProgressBar mfProgessBar;
     private FavoriteMovieAdapter favoriteMovieAdapter;
     private Cursor list;
     private RecyclerView mFRecylerView;
@@ -42,20 +46,19 @@ public class MFavFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_mfav, container, false);
+        favoriteMovieAdapter = new FavoriteMovieAdapter(this);
+
         mFRecylerView = v.findViewById(R.id.rv_favorite_movie);
+        mFRecylerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mFRecylerView.setHasFixedSize(true);
+        mFRecylerView.setAdapter(favoriteMovieAdapter);
+        // favoriteMovieAdapter.setCursor(list);
 
         new loadData().execute();
-        showListData();
+
         return v;
     }
 
-    private void showListData(){
-        favoriteMovieAdapter = new FavoriteMovieAdapter(this, list);
-        mFRecylerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mFRecylerView.setAdapter(favoriteMovieAdapter);
-        favoriteMovieAdapter.setCursor(list);
-        mFRecylerView.setHasFixedSize(true);
-    }
 
     @Override
     public void onDestroyView() {
@@ -63,6 +66,11 @@ public class MFavFragment extends Fragment {
     }
 
     private class loadData extends AsyncTask<Void, Void, Cursor> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
 
         @Override
         protected Cursor doInBackground(Void... voids) {
@@ -77,10 +85,11 @@ public class MFavFragment extends Fragment {
         @Override
         protected void onPostExecute(Cursor cursor) {
             super.onPostExecute(cursor);
-
+            Log.d("CURSORS",cursor.toString());
             list = cursor;
             favoriteMovieAdapter.setCursor(list);
             favoriteMovieAdapter.notifyDataSetChanged();
+
         }
     }
 }
