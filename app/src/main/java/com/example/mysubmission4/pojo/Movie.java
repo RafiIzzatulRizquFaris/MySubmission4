@@ -1,5 +1,6 @@
 package com.example.mysubmission4.pojo;
 
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -7,6 +8,16 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.mysubmission4.DatabaseContract.MovieColumns.JUDUL;
+import static com.example.mysubmission4.DatabaseContract.MovieColumns.MOVIE_ID;
+import static com.example.mysubmission4.DatabaseContract.MovieColumns.OVERVIEW;
+import static com.example.mysubmission4.DatabaseContract.MovieColumns.POSTER;
+import static com.example.mysubmission4.DatabaseContract.MovieColumns.RELEASE;
+import static com.example.mysubmission4.DatabaseContract.MovieColumns.VOTE;
+import static com.example.mysubmission4.DatabaseContract.getColumnDouble;
+import static com.example.mysubmission4.DatabaseContract.getColumnInt;
+import static com.example.mysubmission4.DatabaseContract.getColumnString;
 
 public class Movie implements Parcelable {
     @SerializedName("vote_count")
@@ -188,7 +199,13 @@ public class Movie implements Parcelable {
         dest.writeString(this.releaseDate);
     }
 
-    public Movie() {
+    public Movie(Cursor cursor){
+        this.id = getColumnInt(cursor, MOVIE_ID);
+        this.title = getColumnString(cursor, JUDUL);
+        this.overview = getColumnString(cursor, OVERVIEW);
+        this.voteAverage = getColumnDouble(cursor, VOTE);
+        this.posterPath = getColumnString(cursor, POSTER);
+        this.releaseDate = getColumnString(cursor, RELEASE);
     }
 
     protected Movie(Parcel in) {

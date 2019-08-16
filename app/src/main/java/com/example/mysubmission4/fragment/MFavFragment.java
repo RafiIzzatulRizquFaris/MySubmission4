@@ -46,13 +46,13 @@ public class MFavFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_mfav, container, false);
+
         favoriteMovieAdapter = new FavoriteMovieAdapter(this);
 
         mFRecylerView = v.findViewById(R.id.rv_favorite_movie);
         mFRecylerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mFRecylerView.setHasFixedSize(true);
         mFRecylerView.setAdapter(favoriteMovieAdapter);
-        // favoriteMovieAdapter.setCursor(list);
 
         new loadData().execute();
 

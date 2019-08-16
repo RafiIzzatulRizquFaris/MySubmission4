@@ -12,9 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.mysubmission4.MovieItem;
 import com.example.mysubmission4.R;
 import com.example.mysubmission4.fragment.MFavFragment;
+import com.example.mysubmission4.pojo.Movie;
 
 import static com.example.mysubmission4.ApiConfig.IMAGE_URL;
 
@@ -42,7 +42,7 @@ public class FavoriteMovieAdapter extends RecyclerView.Adapter<FavoriteMovieAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final MovieItem movielist = getItem(position);
+        final Movie movielist = getItem(position);
         String TAG = "FavoriteMovieAdapter";
         Log.d(TAG, "Movie ID: " + movielist.getId());
 
@@ -68,19 +68,19 @@ public class FavoriteMovieAdapter extends RecyclerView.Adapter<FavoriteMovieAdap
         return cursor.getCount();
     }
 
-    private MovieItem getItem(int position) {
+    private Movie getItem(int position) {
         if (!cursor.moveToPosition(position)) {
             throw new IllegalStateException("Position invalid");
         }
-        return new MovieItem(cursor);
+        return new Movie(cursor);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageViewPoster;
         TextView textViewTitle, textViewDate;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.tv_item_name_movie);
             imageViewPoster = itemView.findViewById(R.id.img_item_photo_movie);

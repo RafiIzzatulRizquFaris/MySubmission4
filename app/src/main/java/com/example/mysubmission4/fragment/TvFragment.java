@@ -3,23 +3,21 @@ package com.example.mysubmission4.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ProgressBar;
-
-import com.example.mysubmission4.activity.DetailShowActivity;
 import com.example.mysubmission4.R;
+import com.example.mysubmission4.activity.DetailShowActivity;
 import com.example.mysubmission4.adapter.TvShowAdapter;
 import com.example.mysubmission4.click.ItemClickSupport;
 import com.example.mysubmission4.pojo.TvShow;
