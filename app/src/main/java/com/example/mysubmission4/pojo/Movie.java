@@ -1,6 +1,5 @@
 package com.example.mysubmission4.pojo;
 
-import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -8,11 +7,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.provider.BaseColumns._ID;
-import static com.example.mysubmission4.DatabaseContract.MovieColumns.JUDUL;
-import static com.example.mysubmission4.DatabaseContract.getColumnInt;
-import static com.example.mysubmission4.DatabaseContract.getColumnString;
 
 public class Movie implements Parcelable {
     @SerializedName("vote_count")
@@ -194,9 +188,7 @@ public class Movie implements Parcelable {
         dest.writeString(this.releaseDate);
     }
 
-    public Movie(Cursor cursor) {
-        this.id = getColumnInt(cursor, _ID);
-        this.title = getColumnString(cursor, JUDUL);
+    public Movie() {
     }
 
     protected Movie(Parcel in) {

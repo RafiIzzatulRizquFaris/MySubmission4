@@ -8,6 +8,7 @@ public class DatabaseContract {
     public static String TABEL = "movie";
 
     public static final class MovieColumns implements BaseColumns {
+        public static String MOVIE_ID = "movie_id";
         public static String JUDUL = "title";
         public static String OVERVIEW = "overview";
         public static String POSTER = "poster_path";

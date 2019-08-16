@@ -4,6 +4,15 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import static android.provider.BaseColumns._ID;
+import static com.example.mysubmission4.DatabaseContract.MovieColumns.JUDUL;
+import static com.example.mysubmission4.DatabaseContract.MovieColumns.MOVIE_ID;
+import static com.example.mysubmission4.DatabaseContract.MovieColumns.OVERVIEW;
+import static com.example.mysubmission4.DatabaseContract.MovieColumns.POSTER;
+import static com.example.mysubmission4.DatabaseContract.MovieColumns.RELEASE;
+import static com.example.mysubmission4.DatabaseContract.MovieColumns.VOTE;
+import static com.example.mysubmission4.DatabaseContract.TABEL;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static String DATABASE_NAME = "dbmovie";
@@ -11,17 +20,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String SQL_CREATE_TABEL = String.format("CREATE TABLE %s"+
                     "(%s INTEGER PRIMARY KEY AUTOINCREMENT,"+
                     "%s TEXT NOT NULL,"+
+                    "%s TEXT,"+
                     "%s TEXT NOT NULL,"+
                     "%s TEXT NOT NULL,"+
                     "%s TEXT NOT NULL,"+
                     "%s TEXT NOT NULL)",
-                    DatabaseContract.TABEL,
-            DatabaseContract.MovieColumns._ID,
-            DatabaseContract.MovieColumns.JUDUL,
-            DatabaseContract.MovieColumns.OVERVIEW,
-            DatabaseContract.MovieColumns.RELEASE,
-            DatabaseContract.MovieColumns.VOTE,
-            DatabaseContract.MovieColumns.POSTER
+                    TABEL,
+            _ID,
+            MOVIE_ID,
+            JUDUL,
+            OVERVIEW,
+            RELEASE,
+            VOTE,
+            POSTER
     );
 
     @Override
@@ -31,7 +42,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS "+DatabaseContract.TABEL);
+        db.execSQL("DROP TABLE IF EXISTS "+ TABEL);
         onCreate(db);
     }
 

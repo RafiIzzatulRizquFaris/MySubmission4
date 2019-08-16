@@ -2,6 +2,7 @@ package com.example.mysubmission4.adapter;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +24,16 @@ import java.util.List;
 
 import static com.example.mysubmission4.DatabaseContract.CONTENT_URI;
 import static com.example.mysubmission4.DatabaseContract.MovieColumns.JUDUL;
+import static com.example.mysubmission4.DatabaseContract.MovieColumns.MOVIE_ID;
+import static com.example.mysubmission4.DatabaseContract.MovieColumns.OVERVIEW;
+import static com.example.mysubmission4.DatabaseContract.MovieColumns.POSTER;
+import static com.example.mysubmission4.DatabaseContract.MovieColumns.RELEASE;
+import static com.example.mysubmission4.DatabaseContract.MovieColumns.VOTE;
 
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
+
+    private final String TAG = "Details: ";
 
     private Context context;
     private List<Movie> movieList;
@@ -79,6 +87,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     private void addFavourite(Movie movielist) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(JUDUL, movielist.getTitle());
+        contentValues.put(MOVIE_ID, movielist.getId());
+        contentValues.put(OVERVIEW, movielist.getOverview());
+        contentValues.put(POSTER, movielist.getPosterPath());
+        contentValues.put(RELEASE, movielist.getReleaseDate());
+        contentValues.put(VOTE, movielist.getVoteAverage());
         context.getContentResolver().insert(CONTENT_URI,contentValues);
+
+        Log.d(TAG, "Content Values: " + contentValues);
+
     }
 }

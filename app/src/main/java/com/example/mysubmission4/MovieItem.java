@@ -12,6 +12,7 @@ import java.util.List;
 
 import static android.provider.BaseColumns._ID;
 import static com.example.mysubmission4.DatabaseContract.MovieColumns.JUDUL;
+import static com.example.mysubmission4.DatabaseContract.MovieColumns.MOVIE_ID;
 import static com.example.mysubmission4.DatabaseContract.MovieColumns.OVERVIEW;
 import static com.example.mysubmission4.DatabaseContract.MovieColumns.POSTER;
 import static com.example.mysubmission4.DatabaseContract.MovieColumns.RELEASE;
@@ -177,7 +178,7 @@ public class MovieItem implements Parcelable {
     }
 
     public MovieItem(Cursor cursor){
-        this.id = getColumnInt(cursor, _ID);
+        this.id = getColumnInt(cursor, MOVIE_ID);
         this.title = getColumnString(cursor, JUDUL);
         this.overview = getColumnString(cursor, OVERVIEW);
         this.voteAverage = getColumnDouble(cursor, VOTE);
@@ -238,4 +239,15 @@ public class MovieItem implements Parcelable {
         }
     };
 
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", posterPath='" + posterPath + '\'' +
+                ", overview='" + overview + '\'' +
+                ", release date='" + releaseDate + '\'' +
+                '}';
+
+    }
 }
